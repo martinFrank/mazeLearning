@@ -1,9 +1,9 @@
 class Cell:
-    door_north = 0
-    door_east = 0
-    door_west = 0
-    door_south = 0
-    visited = 0
+    door_north = False
+    door_east = False
+    door_west = False
+    door_south = False
+    visited = False
     x_pos = 0
     y_pos = 0
 
@@ -13,22 +13,22 @@ class Cell:
 
     def top_row(self):
         door = "###"
-        if self.door_north == 1:
+        if self.door_north:
             door = "   "
         return "#" + door + "#"
 
     def mid_row(self):
         left_door = "#"
-        if self.door_west == 1:
+        if self.door_west:
             left_door = " "
         right_door = "#"
-        if self.door_east == 1:
+        if self.door_east:
             right_door = " "
         return left_door + "   " + right_door
 
     def bot_row(self):
         door = "###"
-        if self.door_south == 1:
+        if self.door_south:
             door = "   "
         return "#" + door + "#"
 

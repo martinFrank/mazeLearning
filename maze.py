@@ -16,23 +16,23 @@ def push(item, stack):
 def add_if_unvisited(maze, pos, target):
     if pos in maze:
         current = maze[pos]
-        if current.visited == 0:
+        if not current.visited:
             target.append(current)
 
 
 def carve(from_cell, to_cell):
     if to_cell.x_pos - from_cell.x_pos == 1:
-        from_cell.door_east = 1
-        to_cell.door_west = 1
+        from_cell.door_east = True
+        to_cell.door_west = True
     if to_cell.x_pos - from_cell.x_pos == -1:
-        from_cell.door_west = 1
-        to_cell.door_east = 1
+        from_cell.door_west = True
+        to_cell.door_east = True
     if to_cell.y_pos - from_cell.y_pos == -1:
-        from_cell.door_north = 1
-        to_cell.door_south = 1
+        from_cell.door_north = True
+        to_cell.door_south = True
     if to_cell.y_pos - from_cell.y_pos == 1:
-        from_cell.door_south = 1
-        to_cell.door_north = 1
+        from_cell.door_south = True
+        to_cell.door_north = True
 
 
 class Maze:
@@ -52,7 +52,7 @@ class Maze:
     def back_tracker(self):
         stack = {}
         current = self.cells[complex(random.randint(0, self.width - 1), random.randint(0, self.height - 1))]
-        current.visited = 1
+        current.visited = True
         push(current, stack)
         while len(stack) > 0:
             current = pop(stack)
@@ -63,7 +63,7 @@ class Maze:
                 chosen = unvisited[random_index]
                 carve(chosen, current)
                 current = chosen
-                current.visited = 1
+                current.visited = True
                 push(current, stack)
 
     def list_unvisited(self, current):
